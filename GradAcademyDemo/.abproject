@@ -1,0 +1,45 @@
+{
+  "ProjectName": "GradAcademyDemo",
+  "ProjectGuid": "3315e38b-812b-498c-917d-c93b0004472b",
+  "projectVersion": 1,
+  "AppIdentifier": "com.telerik.GradAcademyDemo",
+  "DisplayName": "GradAcademyDemo",
+  "Author": "",
+  "Description": "",
+  "BundleVersion": "1.0",
+  "AndroidVersionCode": "1",
+  "iOSDeviceFamily": [
+    "1",
+    "2"
+  ],
+  "iOSBackgroundMode": [],
+  "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
+  "FrameworkVersion": "3.7.0",
+  "AndroidPermissions": [
+    "android.permission.INTERNET"
+  ],
+  "DeviceOrientations": [
+    "Portrait",
+    "Landscape"
+  ],
+  "AndroidHardwareAcceleration": "false",
+  "iOSStatusBarStyle": "Default",
+  "Framework": "Cordova",
+  "WP8TileTitle": "",
+  "WP8Publisher": "",
+  "WP8Capabilities": [
+    "ID_CAP_NETWORKING",
+    "ID_CAP_WEBBROWSERCOMPONENT"
+  ],
+  "WP8Requirements": [],
+  "WP8PublisherID": "{3c10c448-5b49-49d3-bb41-d30def68d0cd}",
+  "WP8ProductID": "{12d65740-3f99-4d2e-b603-e309405918e5}",
+  "WPSdk": "8.0",
+  "WP8PackageIdentityName": "1234Telerik.GradAcademyDemo",
+  "WP8WindowsPublisherName": "CN=Telerik",
+  "WP8SupportedResolutions": [
+    "ID_RESOLUTION_WVGA",
+    "ID_RESOLUTION_WXGA",
+    "ID_RESOLUTION_HD720P"
+  ]
+}
