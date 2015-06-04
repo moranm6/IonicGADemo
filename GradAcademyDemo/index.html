@@ -41,24 +41,6 @@
         </ion-view>
     </script>
 
-    <script id="templates/forgot-password.html" type="text/ng-template">
-        <ion-view view-title="Forgot Password">
-            <ion-content padding="true">
-                <p>
-                    Yeah this is just a demo showing how views can be shown without tabs, then you can navigate
-                    to views within tabs. Additionally, only one set of tabs needs to be written for all of the different views that should go inside the tabs. (Compared to written the same tab links in the footer of every view that's in a tab.)
-                </p>
-                <p>
-                    There's no username/password, just click
-                    the Sign-In button back a the sign-in view.
-                </p>
-                <p>
-                    Return to <a href="#/sign-in">Sign-In</a>.
-                </p>
-            </ion-content>
-        </ion-view>
-    </script>
-
     <script id="templates/tabs.html" type="text/ng-template">
         <ion-view>
             <ion-tabs class="tabs-icon-top tabs-positive">
@@ -67,8 +49,8 @@
                     <ion-nav-view name="home-tab"></ion-nav-view>
                 </ion-tab>
 
-                <ion-tab title="About" icon="ion-ios-information" href="#/tab/about">
-                    <ion-nav-view name="about-tab"></ion-nav-view>
+                <ion-tab title="Scoreboard" icon="ion-connection-bars" href="#/tab/scoreboard">
+                    <ion-nav-view name="scoreboard-tab"></ion-nav-view>
                 </ion-tab>
 
                 <ion-tab title="Sign-Out" icon="ion-log-out" href="#/sign-in">
@@ -86,9 +68,6 @@
                     navigate to child views of each tab and notice how
                     each tab has its own navigation history.
                 </p>
-                <p>
-                    <a class="button icon icon-right ion-chevron-right" href="#/tab/facts">Scientific Facts</a>
-                </p>
             </ion-content>
         </ion-view>
     </script>
@@ -102,7 +81,6 @@
                 <p>A cockroach will live nine days without it's head, before it starves to death.</p>
                 <p>Polar bears are left handed.</p>
                 <p>
-                    <a class="button icon ion-home" href="#/tab/home"> Home</a>
                     <a class="button icon icon-right ion-chevron-right" href="#/tab/facts2">More Facts</a>
                 </p>
             </ion-content>
@@ -118,22 +96,18 @@
                 <p>1 in 8 Americans has worked at a McDonalds restaurant.</p>
                 <p>$283,200 is the absolute highest amount of money you can win on Jeopardy.</p>
                 <p>101 Dalmatians, Peter Pan, Lady and the Tramp, and Mulan are the only Disney cartoons where both parents are present and don't die throughout the movie.</p>
-                <p>
-                    <a class="button icon ion-home" href="#/tab/home"> Home</a>
-                    <a class="button icon ion-chevron-left" href="#/tab/facts"> Scientific Facts</a>
-                </p>
             </ion-content>
         </ion-view>
     </script>
 
-    <script id="templates/about.html" type="text/ng-template">
-        <ion-view view-title="About">
+    <script id="templates/scoreboard.html" type="text/ng-template">
+        <ion-view view-title="Scoreboard">
             <ion-content padding="true">
                 <h3>Create hybrid mobile apps with the web technologies you love.</h3>
                 <p>Free and open source, Ionic offers a library of mobile-optimized HTML, CSS and JS components for building highly interactive apps.</p>
                 <p>Built with Sass and optimized for AngularJS.</p>
                 <p>
-                    <a class="button icon icon-right ion-chevron-right" href="#/tab/navstack">Tabs Nav Stack</a>
+                    <a class="button icon icon-right ion-chevron-right" href="#/tab/facts">Tabs Nav Stack</a>
                 </p>
             </ion-content>
         </ion-view>

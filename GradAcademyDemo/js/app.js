@@ -8,10 +8,6 @@ angular.module('ionicApp', ['ionic'])
           templateUrl: 'templates/sign-in.html',
           controller: 'SignInCtrl'
       })
-      .state('forgotpassword', {
-          url: '/forgot-password',
-          templateUrl: 'templates/forgot-password.html'
-      })
       .state('tabs', {
           url: '/tab',
           abstract: true,
@@ -29,7 +25,7 @@ angular.module('ionicApp', ['ionic'])
       .state('tabs.facts', {
           url: '/facts',
           views: {
-              'home-tab': {
+              'scoreboard-tab': {
                   templateUrl: 'templates/facts.html'
               }
           }
@@ -37,16 +33,16 @@ angular.module('ionicApp', ['ionic'])
       .state('tabs.facts2', {
           url: '/facts2',
           views: {
-              'home-tab': {
+              'scoreboard-tab': {
                   templateUrl: 'templates/facts2.html'
               }
           }
       })
-      .state('tabs.about', {
-          url: '/about',
+      .state('tabs.scoreboard', {
+          url: '/scoreboard',
           views: {
-              'about-tab': {
-                  templateUrl: 'templates/about.html'
+              'scoreboard-tab': {
+                  templateUrl: 'templates/scoreboard.html'
               }
           }
       })
@@ -88,7 +84,5 @@ angular.module('ionicApp', ['ionic'])
 })
 
 .controller('HomeTabCtrl', function ($scope, $rootScope) {
-
-    debugger;
     console.log('HomeTabCtrl');
 }); 
