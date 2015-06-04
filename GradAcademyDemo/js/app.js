@@ -57,14 +57,14 @@ angular.module('ionicApp', ['ionic'])
                   templateUrl: 'templates/nav-stack.html'
               }
           }
-      })
-      .state('tabs.contact', {
-          url: '/contact',
-          views: {
-              'contact-tab': {
-                  templateUrl: 'templates/contact.html'
-              }
-          }
+      //})
+      //.state('tabs.contact', {
+      //    url: '/contact',
+      //    views: {
+      //        'contact-tab': {
+      //            templateUrl: 'templates/contact.html'
+      //        }
+      //    }
       });
 
 
@@ -72,15 +72,23 @@ angular.module('ionicApp', ['ionic'])
 
 })
 
-.controller('SignInCtrl', function ($scope, $state) {
+.controller('SignInCtrl', function ($scope, $state, $rootScope) {
+    this.rootScope = $rootScope;
+
+    $scope.user = {}
+    $scope.user.username = "Test";
 
     $scope.signIn = function (user) {
+        $rootScope.user = user;
+
         console.log('Sign-In', user);
         $state.go('tabs.home');
     };
 
 })
 
-.controller('HomeTabCtrl', function ($scope) {
+.controller('HomeTabCtrl', function ($scope, $rootScope) {
+
+    debugger;
     console.log('HomeTabCtrl');
-});
+}); 
