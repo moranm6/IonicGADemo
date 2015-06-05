@@ -30,6 +30,20 @@
                         </label>
 
                     </div>
+                    
+                    <div class="list">
+                        <label class="item item-input item-select">
+                            <div class="input-label">
+                                Player
+                            </div>
+                            <select ng-model="players" ng-options='player.name  as (player.FirstName + " " + player.LastName) for player in players'>
+                                <option>Blue</option>
+                                <option selected>Green</option>
+                                <option>Red</option>
+                            </select>
+                        </label>
+                    </div>
+
                     <div class="padding">
                         <button class="button button-block button-positive" ng-disabled="!usernameForm.$valid" ng-click="signIn(user)">
                             Sign-In

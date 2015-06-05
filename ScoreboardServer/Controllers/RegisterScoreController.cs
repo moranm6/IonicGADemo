@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Web.Http;
+using ScoreboardServer.Models;
 using ScoreboardServer.Services;
 
 namespace ScoreboardServer.Controllers
@@ -6,38 +8,32 @@ namespace ScoreboardServer.Controllers
     public class RegisterScoreController : ApiController
     {
         private IVotePersister _votePersister;
+        private ScoreboardContext _ScoreboardContext;
 
         public RegisterScoreController()
         {
-            _votePersister = new StaticVotePersister();
+            _ScoreboardContext = new ScoreboardContext();
+            _votePersister = new VotePersister(_ScoreboardContext);
         }
 
-            //// GET: api/RegisterScore
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        [Route("Vote/{name}")]
-        public string Get(string name)
+        [Route("Vote/{playerId}")]
+        public string Get(int playerId)
         {
-            return _votePersister.GetCountBy(name).ToString();
+            var player = _votePersister.FindPlayerBy(playerId);
+            return _votePersister.GetCountBy(player).ToString();
         }
 
-        [Route("Vote/{name}")]
-        public void Post(string name)
+        [Route("Vote/{playerId}")]
+        public void Post(int playerId)
         {
-            _votePersister.PersistVote(name);
+            var player = _votePersister.FindPlayerBy(playerId);
+            _votePersister.PersistVote(player);
         }
 
-        //// PUT: api/RegisterScore/5
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
-
-        //// DELETE: api/RegisterScore/5
-        //public void Delete(int id)
-        //{
-        //}
+        [Route("Players/")]
+        public List<Player> GetPlayers()
+        {
+            return _votePersister.GetAllPlayers();
+        }
     }
 }

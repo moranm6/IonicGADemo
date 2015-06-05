@@ -53,14 +53,14 @@ angular.module('ionicApp', ['ionic'])
                   templateUrl: 'templates/nav-stack.html'
               }
           }
-      //})
-      //.state('tabs.contact', {
-      //    url: '/contact',
-      //    views: {
-      //        'contact-tab': {
-      //            templateUrl: 'templates/contact.html'
-      //        }
-      //    }
+          //})
+          //.state('tabs.contact', {
+          //    url: '/contact',
+          //    views: {
+          //        'contact-tab': {
+          //            templateUrl: 'templates/contact.html'
+          //        }
+          //    }
       });
 
 
@@ -68,11 +68,20 @@ angular.module('ionicApp', ['ionic'])
 
 })
 
-.controller('SignInCtrl', function ($scope, $state, $rootScope) {
+.controller('SignInCtrl', function ($scope, $state, $rootScope, $http) {
     this.rootScope = $rootScope;
 
     $scope.user = {}
+
     $scope.user.username = "Test";
+
+    $http({
+        method: 'GET',
+        url: 'http://hmbgascoreboardserver.azurewebsites.net/Players'
+    }).success(function (data) {
+        debugger;
+        $scope.players = data;
+    });
 
     $scope.signIn = function (user) {
         $rootScope.user = user;
@@ -80,25 +89,26 @@ angular.module('ionicApp', ['ionic'])
         console.log('Sign-In', user);
         $state.go('tabs.home');
     };
-
 })
 
 .controller('HomeTabCtrl', function ($scope, $rootScope, $http) {
     console.log('HomeTabCtrl');
 
-    this.rootScope = $rootScope;
-
     $scope.stuffTest = function (user) {
-        $http.post('http://localhost:49376/Vote/' + user.username);
+        //$http.post('http://hmbgascoreboardserver.azurewebsites.net/Vote/' + user.username);
+        $http.post('http://hmbgascoreboardserver.azurewebsites.net/Vote/1');
     };
 });
 
 
+// Not sure about this yet. I want to figure out how to display the clock and battery still
 ionic.Platform.ready(function () {
     //hide the status bar using the StatusBar plugin
     if (window.StatusBar) {
         // org.apache.cordova.statusbar required
-        StatusBar.hide();
-        ionic.Platform.fullScreen();
+        //StatusBar.hide();
+        //StatusBar.overlaysWebView(true);
+        //ionic.Platform.fullScreen();
+        StatusBar.styleDefault();
     }
 });

@@ -1,8 +1,13 @@
+using System.Collections.Generic;
+using ScoreboardServer.Models;
+
 namespace ScoreboardServer.Services
 {
     public interface IVotePersister
     {
-        void PersistVote(string name);
-        int GetCountBy(string name);
+        Player FindPlayerBy(int playerId);
+        void PersistVote(Player player);
+        int GetCountBy(Player player);
+        List<Player> GetAllPlayers();
     }
 }
