@@ -63,11 +63,21 @@
 <script id="templates/home.html" type="text/ng-template">
         <ion-view view-title="Home">
             <ion-content padding="true">
+                <h1>
+                    Super Game
+                </h1>
                 <p>
-                    This page should do stuff when you tap a button!
+                    Click the button to add points. If you have the most points, you win!
+                </p>
+                <p>
+                    What do you win? Who knows?
                 </p>
                 
-                <a class="button icon icon-left ion-radio-waves">Do Stuff   </a>
+                <button class="button button-full button-positive" ng-click="stuffTest(user)">
+                    <i class="icon ion-plus "></i>
+                    Add Point
+                </button>
+        
             </ion-content>
         </ion-view>
     </script>

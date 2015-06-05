@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
+using ScoreboardServer.Services;
 
 namespace ScoreboardServer.Controllers
 {
     public class RegisterScoreController : ApiController
     {
-        private static Dictionary<string, int> _scores;
+        private IVotePersister _votePersister;
+
+        public RegisterScoreController()
+        {
+            _votePersister = new StaticVotePersister();
+        }
 
             //// GET: api/RegisterScore
         //public IEnumerable<string> Get()
@@ -17,23 +18,16 @@ namespace ScoreboardServer.Controllers
         //    return new string[] { "value1", "value2" };
         //}
 
-        //// GET: api/RegisterScore/5
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        [Route("Vote/{name}")]
+        public string Get(string name)
+        {
+            return _votePersister.GetCountBy(name).ToString();
+        }
 
-        // POST: api/RegisterScore
-        [Route("Register/{name}")]
+        [Route("Vote/{name}")]
         public void Post(string name)
         {
-            if (!_scores.ContainsKey(name))
-            {
-                _scores[name] = 0;
-
-            }
-            _scores[name] = _scores[name]++;
-
+            _votePersister.PersistVote(name);
         }
 
         //// PUT: api/RegisterScore/5

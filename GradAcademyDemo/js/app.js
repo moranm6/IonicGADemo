@@ -83,6 +83,22 @@ angular.module('ionicApp', ['ionic'])
 
 })
 
-.controller('HomeTabCtrl', function ($scope, $rootScope) {
+.controller('HomeTabCtrl', function ($scope, $rootScope, $http) {
     console.log('HomeTabCtrl');
-}); 
+
+    this.rootScope = $rootScope;
+
+    $scope.stuffTest = function (user) {
+        $http.post('http://localhost:49376/Vote/' + user.username);
+    };
+});
+
+
+ionic.Platform.ready(function () {
+    //hide the status bar using the StatusBar plugin
+    if (window.StatusBar) {
+        // org.apache.cordova.statusbar required
+        StatusBar.hide();
+        ionic.Platform.fullScreen();
+    }
+});
