@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.EnterpriseServices;
 using System.Linq;
 using ScoreboardServer.Models;
@@ -36,7 +38,9 @@ namespace ScoreboardServer.Services
 
         public List<Player> GetAllPlayers()
         {
-            return _scoreboardContext.Players.ToList();
+            _scoreboardContext.Configuration.ProxyCreationEnabled = false;
+            _scoreboardContext.Configuration.LazyLoadingEnabled = false;
+            return _scoreboardContext.Players.Include(p => p.Votes).ToList();
         }
     }
 }

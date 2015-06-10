@@ -33,7 +33,9 @@ namespace ScoreboardServer.Controllers
         [Route("Players/")]
         public List<Player> GetPlayers()
         {
-            return _votePersister.GetAllPlayers();
+            var players =  _votePersister.GetAllPlayers();
+
+           return players;
         }
     }
 }
