@@ -79,14 +79,13 @@ angular.module('ionicApp', ['ionic'])
         method: 'GET',
         url: 'http://hmbgascoreboardserver.azurewebsites.net/Players'
     }).success(function (data) {
-        debugger;
         $scope.players = data;
     });
 
-    $scope.signIn = function (user) {
-        $rootScope.user = user;
+    $scope.signIn = function (player) {
+        $rootScope.selectedPlayer = player;
 
-        console.log('Sign-In', user);
+        console.log('Sign-In', player);
         $state.go('tabs.home');
     };
 })
@@ -94,9 +93,8 @@ angular.module('ionicApp', ['ionic'])
 .controller('HomeTabCtrl', function ($scope, $rootScope, $http) {
     console.log('HomeTabCtrl');
 
-    $scope.stuffTest = function (user) {
-        //$http.post('http://hmbgascoreboardserver.azurewebsites.net/Vote/' + user.username);
-        $http.post('http://hmbgascoreboardserver.azurewebsites.net/Vote/1');
+    $scope.stuffTest = function (player) {
+        $http.post('http://hmbgascoreboardserver.azurewebsites.net/Vote/' + player.PlayerId);
     };
 });
 

@@ -23,29 +23,24 @@
         <ion-view view-title="Sign-In">
             <ion-content>
                 <form name="usernameForm">
-                    <div class="list">
-                        <label class="item item-input">
-                            <span class="input-label">Username</span>
-                            <input type="text" name="username" required ng-required="true" ng-model="user.username">
-                        </label>
-
-                    </div>
                     
                     <div class="list">
                         <label class="item item-input item-select">
                             <div class="input-label">
                                 Player
                             </div>
-                            <select ng-model="players" ng-options='player.name  as (player.FirstName + " " + player.LastName) for player in players'>
-                                <option>Blue</option>
-                                <option selected>Green</option>
-                                <option>Red</option>
-                            </select>
+                            <select ng-model="selectedPlayer" ng-options='player.FirstName for player in players'>
+                            </select>         
+                            
                         </label>
+            
+                        {{selectedPlayer | json}}
+
+
                     </div>
 
                     <div class="padding">
-                        <button class="button button-block button-positive" ng-disabled="!usernameForm.$valid" ng-click="signIn(user)">
+                        <button class="button button-block button-positive" ng-disabled="!usernameForm.$valid" ng-click="signIn(selectedPlayer)">
                             Sign-In
                         </button>
                     </div>
@@ -87,7 +82,7 @@
                     What do you win? Who knows?
                 </p>
                 
-                <button class="button button-full button-positive" ng-click="stuffTest(user)">
+                <button class="button button-full button-positive" ng-click="stuffTest(selectedPlayer)">
                     <i class="icon ion-plus "></i>
                     Add Point
                 </button>
