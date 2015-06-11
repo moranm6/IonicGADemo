@@ -22,6 +22,14 @@ angular.module('ionicApp', ['ionic'])
               }
           }
       })
+        .state('tabs.details', {
+            url: '/details',
+            views: {
+                'scoreboard-tab': {
+                    templateUrl: 'templates/details.html'
+                }
+            }
+        })
       .state('tabs.facts', {
           url: '/facts',
           views: {
@@ -87,7 +95,7 @@ angular.module('ionicApp', ['ionic'])
 .controller('HomeTabCtrl', function ($scope, $rootScope, $http) {
     console.log('HomeTabCtrl');
 
-    $scope.stuffTest = function (player) {
+    $scope.vote = function (player) {
         $http.post(window.serverUrl + "/Vote/" + player.PlayerId);
     };
 })
@@ -101,7 +109,7 @@ angular.module('ionicApp', ['ionic'])
     $http({
         method: "GET",
         url: window.serverUrl + "/Scoreboard"
-    }).success(function(data) {
+    }).success(function (data) {
         // sort the players by vote
         $scope.players = data.sort(function (x, y) { return x.VoteCount < y.VoteCount; });
     });

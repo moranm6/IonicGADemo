@@ -6,6 +6,7 @@
     <title>Sign-in, Then Tabs Example</title>
 
     <link href="bower_components/ionic/release/css/ionic.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
     <script src="bower_components/ionic/release/js/ionic.bundle.js"></script>
 
 </head>
@@ -19,18 +20,18 @@
 
     <ion-nav-view></ion-nav-view>
 
-<script id="templates/sign-in.html" type="text/ng-template">
+    <script id="templates/sign-in.html" type="text/ng-template">
         <ion-view view-title="Sign-In">
             <ion-content>
                 <form name="usernameForm">
-                    
+
                     <div class="list">
                         <label class="item item-input item-select">
                             <div class="input-label">
                                 Player
                             </div>
-                            <select ng-model="selectedPlayer" required ng-required="true" ng-options='player.FirstName for player in players'></select>         
-                            
+                            <select ng-model="selectedPlayer" required ng-required="true" ng-options='player.FirstName for player in players'></select>
+
                         </label>
                     </div>
 
@@ -64,7 +65,7 @@
         </ion-view>
     </script>
 
-<script id="templates/home.html" type="text/ng-template">
+    <script id="templates/home.html" type="text/ng-template">
         <ion-view view-title="Home">
             <ion-content padding="true">
                 <h1>
@@ -76,12 +77,12 @@
                 <p>
                     What do you win? Who knows?
                 </p>
-                
-                <button class="button button-full button-positive" ng-click="stuffTest(selectedPlayer)">
+
+                <button class="button button-full button-positive" ng-click="vote(selectedPlayer)">
                     <i class="icon ion-plus "></i>
                     Add Point
                 </button>
-        
+
             </ion-content>
         </ion-view>
     </script>
@@ -102,7 +103,7 @@
     </script>
 
     <script id="templates/facts2.html" type="text/ng-template">
-            <ion-view view-title="Also Factual">
+        <ion-view view-title="Also Factual">
             <ion-content padding="true">
                 <p>111,111,111 x 111,111,111 = 12,345,678,987,654,321</p>
                 <p>1 in every 4 Americans has appeared on T.V.</p>
@@ -117,22 +118,30 @@
 <script id="templates/scoreboard.html" type="text/ng-template">
         <ion-view view-title="Scoreboard">
             <ion-content padding="true">
-                
-                <ul ng-repeat="player in players">
-                    <li>{{player.FirstName}} - {{player.VoteCount}}</li>
+
+                <ul id="scoreboardList" ng-repeat="player in players">
+                    <li><a class="button-block" href="#/tab/details">{{player.FirstName}} - {{player.VoteCount}}</a></li>
                 </ul>
 
-                <h3>Create hybrid mobile apps with the web technologies you love.</h3>
+                <!--<h3>Create hybrid mobile apps with the web technologies you love.</h3>
                 <p>Free and open source, Ionic offers a library of mobile-optimized HTML, CSS and JS components for building highly interactive apps.</p>
                 <p>Built with Sass and optimized for AngularJS.</p>
                 <p>
                     <a class="button icon icon-right ion-chevron-right" href="#/tab/facts">Tabs Nav Stack</a>
-                </p>
+                </p>-->
             </ion-content>
         </ion-view>
     </script>
 
-    <script id="templates/nav-stack.html" type="text/ng-template">
+<script id="templates/details.html" type="text/ng-template">
+    <ion-view view-title="Details">
+        <ion-content padding="true">
+            Player details... blah blah blah
+        </ion-content>
+    </ion-view>
+</script>
+
+<script id="templates/nav-stack.html" type="text/ng-template">
         <ion-view view-title="Tab Nav Stack">
             <ion-content padding="true">
                 <p><img src="http://ionicframework.com/img/diagrams/tabs-nav-stack.png" style="width:100%"></p>
