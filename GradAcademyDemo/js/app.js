@@ -64,23 +64,20 @@ angular.module('ionicApp', ['ionic'])
           }
       });
 
-
-    $urlRouterProvider.otherwise("/sign-in");
-
     //window.serverUrl = "http://hmbgascoreboardserver.azurewebsites.net";
     window.serverUrl = "http://localhost:49376";
 
+
+    $urlRouterProvider.otherwise("/sign-in");
+
 })
 
-.controller('SignInCtrl', function ($scope, $state, $rootScope, $http) {
+.controller('SignInCtrl', function ($scope, $state, $rootScope, playerService) {
     this.rootScope = $rootScope;
 
     $scope.user = {}
 
-    $http({
-        method: 'GET',
-        url: window.serverUrl + "/Players"
-    }).success(function (data) {
+    playerService.getPlayers(function (data) {
         $scope.players = data;
     });
 
@@ -92,28 +89,49 @@ angular.module('ionicApp', ['ionic'])
     };
 })
 
-.controller('HomeTabCtrl', function ($scope, $rootScope, $http) {
+.controller('HomeTabCtrl', function ($scope, $rootScope, playerService) {
     console.log('HomeTabCtrl');
 
-    $scope.vote = function (player) {
-        $http.post(window.serverUrl + "/Vote/" + player.PlayerId);
-    };
+    $scope.vote = playerService.voteForPlayer;
 })
 
-.controller('ScoreboardTabCtrl', function ($scope, $rootScope, $http) {
+.controller("ScoreboardTabCtrl", function ($scope, $rootScope, playerService) {
     console.log("ScoreboardTabCtrl");
 
     // Get the players list with votes
     // This will be used to render a scoreboard
-    // TODO figure out how to get this to fire every timee the page is loaded
-    $http({
-        method: "GET",
-        url: window.serverUrl + "/Scoreboard"
-    }).success(function (data) {
-        // sort the players by vote
-        $scope.players = data.sort(function (x, y) { return x.VoteCount < y.VoteCount; });
+    $scope.$on('$ionicView.enter', function () {
+        // code to run each time view is entered
+        playerService.getPlayers(function (data) {
+            // sort the players by vote
+            $scope.players = data.sort(function (x, y) { return x.VoteCount < y.VoteCount; });
+        });
     });
+})
 
+//.constant('API_END_POINT', 'http://hmbgascoreboardserver.azurewebsites.net')
+.constant('API_END_POINT', 'http://localhost:49376')
+
+.service("playerService", function ($http, API_END_POINT) {
+    // public methods
+
+    // takes a callback that takes one parameter data
+    function getPlayers(callback) {
+        $http({
+            method: "GET",
+            url: API_END_POINT + "/Scoreboard"
+        }).success(callback);
+    }
+
+    function voteForPlayer(player) {
+        $http.post(API_END_POINT + "/Vote/" + player.PlayerId);
+    }
+
+    // public api
+    return {
+        getPlayers: getPlayers,
+        voteForPlayer: voteForPlayer
+    }
 });
 
 
