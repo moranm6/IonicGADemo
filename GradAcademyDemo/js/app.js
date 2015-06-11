@@ -98,14 +98,27 @@ angular.module('ionicApp', ['ionic'])
 .controller("ScoreboardTabCtrl", function ($scope, $rootScope, playerService) {
     console.log("ScoreboardTabCtrl");
 
+    var interval;
+
+    var callbackFunction = function (data) {
+        // sort the players by vote
+        $scope.players = data.sort(function (x, y) { return x.VoteCount < y.VoteCount; });
+    };
+
     // Get the players list with votes
     // This will be used to render a scoreboard
     $scope.$on('$ionicView.enter', function () {
         // code to run each time view is entered
-        playerService.getPlayers(function (data) {
-            // sort the players by vote
-            $scope.players = data.sort(function (x, y) { return x.VoteCount < y.VoteCount; });
-        });
+        playerService.getPlayers(callbackFunction);
+
+        interval = setInterval(function () {
+            // we'll keep polling so we don't have to work on websockets during this demo
+            playerService.getPlayers(callbackFunction);
+        }, 1000);
+    });
+
+    $scope.$on("$ionicView.leave", function () {
+        clearInterval(interval);
     });
 })
 
