@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using ScoreboardServer.Models;
 using ScoreboardServer.Services;
@@ -37,5 +39,19 @@ namespace ScoreboardServer.Controllers
 
            return players;
         }
+
+        [Route("Scoreboard/")]
+        public List<Player> GetScoreboard()
+        {
+            var players = _votePersister.GetAllPlayers();
+
+            players.ForEach(p =>
+            {
+                var validVotes = p.Votes.Where(v => v.CreatedAt >= DateTime.UtcNow.AddMinutes(-5)).ToList();
+                p.Votes = (ICollection<Vote>) validVotes;
+            });
+
+            return players;
+        } 
     }
 }

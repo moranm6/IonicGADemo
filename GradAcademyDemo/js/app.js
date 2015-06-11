@@ -42,7 +42,8 @@ angular.module('ionicApp', ['ionic'])
           url: '/scoreboard',
           views: {
               'scoreboard-tab': {
-                  templateUrl: 'templates/scoreboard.html'
+                  templateUrl: 'templates/scoreboard.html',
+                  controller: "ScoreboardTabCtrl"
               }
           }
       })
@@ -53,14 +54,6 @@ angular.module('ionicApp', ['ionic'])
                   templateUrl: 'templates/nav-stack.html'
               }
           }
-          //})
-          //.state('tabs.contact', {
-          //    url: '/contact',
-          //    views: {
-          //        'contact-tab': {
-          //            templateUrl: 'templates/contact.html'
-          //        }
-          //    }
       });
 
 
@@ -69,7 +62,7 @@ angular.module('ionicApp', ['ionic'])
     //window.serverUrl = "http://hmbgascoreboardserver.azurewebsites.net";
     window.serverUrl = "http://localhost:49376";
 
- })
+})
 
 .controller('SignInCtrl', function ($scope, $state, $rootScope, $http) {
     this.rootScope = $rootScope;
@@ -97,6 +90,22 @@ angular.module('ionicApp', ['ionic'])
     $scope.stuffTest = function (player) {
         $http.post(window.serverUrl + "/Vote/" + player.PlayerId);
     };
+})
+
+.controller('ScoreboardTabCtrl', function ($scope, $rootScope, $http) {
+    console.log("ScoreboardTabCtrl");
+
+    // Get the players list with votes
+    // This will be used to render a scoreboard
+    // TODO figure out how to get this to fire every timee the page is loaded
+    $http({
+        method: "GET",
+        url: window.serverUrl + "/Scoreboard"
+    }).success(function(data) {
+        // sort the players by vote
+        $scope.players = data.sort(function (x, y) { return x.VoteCount < y.VoteCount; });
+    });
+
 });
 
 

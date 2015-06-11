@@ -92,6 +92,10 @@
     <Compile Include="Migrations\201506051759169_AddingVotes.Designer.cs">
       <DependentUpon>201506051759169_AddingVotes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506111457256_Datestamping-Votes.cs" />
+    <Compile Include="Migrations\201506111457256_Datestamping-Votes.Designer.cs">
+      <DependentUpon>201506111457256_Datestamping-Votes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\ScoreboardContext.cs" />
@@ -124,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506051759169_AddingVotes.resx">
       <DependentUpon>201506051759169_AddingVotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506111457256_Datestamping-Votes.resx">
+      <DependentUpon>201506111457256_Datestamping-Votes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

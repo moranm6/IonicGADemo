@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
@@ -25,7 +26,8 @@ namespace ScoreboardServer.Services
         {
             _scoreboardContext.Votes.Add(new Vote
             {
-                Player = player
+                Player = player,
+                CreatedAt = DateTime.UtcNow // TODO Figure out how to do this with EF once you have internet access
             });
 
             _scoreboardContext.SaveChanges();
@@ -40,7 +42,10 @@ namespace ScoreboardServer.Services
         {
             _scoreboardContext.Configuration.ProxyCreationEnabled = false;
             _scoreboardContext.Configuration.LazyLoadingEnabled = false;
-            return _scoreboardContext.Players.Include(p => p.Votes).ToList();
+
+            var playersQuery = _scoreboardContext.Players.Include(p => p.Votes);
+
+            return playersQuery.ToList();
         }
     }
 }
