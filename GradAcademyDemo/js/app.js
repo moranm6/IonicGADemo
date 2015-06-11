@@ -64,20 +64,21 @@ angular.module('ionicApp', ['ionic'])
       });
 
 
-    $urlRouterProvider.otherwise('/sign-in');
+    $urlRouterProvider.otherwise("/sign-in");
 
-})
+    //window.serverUrl = "http://hmbgascoreboardserver.azurewebsites.net";
+    window.serverUrl = "http://localhost:49376";
+
+ })
 
 .controller('SignInCtrl', function ($scope, $state, $rootScope, $http) {
     this.rootScope = $rootScope;
 
     $scope.user = {}
 
-    $scope.user.username = "Test";
-
     $http({
         method: 'GET',
-        url: 'http://hmbgascoreboardserver.azurewebsites.net/Players'
+        url: window.serverUrl + "/Players"
     }).success(function (data) {
         $scope.players = data;
     });
@@ -94,7 +95,7 @@ angular.module('ionicApp', ['ionic'])
     console.log('HomeTabCtrl');
 
     $scope.stuffTest = function (player) {
-        $http.post('http://hmbgascoreboardserver.azurewebsites.net/Vote/' + player.PlayerId);
+        $http.post(window.serverUrl + "/Vote/" + player.PlayerId);
     };
 });
 

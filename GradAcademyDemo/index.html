@@ -29,8 +29,7 @@
                             <div class="input-label">
                                 Player
                             </div>
-                            <select ng-model="selectedPlayer" ng-options='player.FirstName for player in players'>
-                            </select>         
+                            <select ng-model="selectedPlayer" required ng-required="true" ng-options='player.FirstName for player in players'></select>         
                             
                         </label>
                     </div>
